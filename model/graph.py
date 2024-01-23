@@ -141,6 +141,30 @@ class TrafficNetwork(Graph):
         self.__destinations = D
         self.__cast()
 
+    def network_loader(self, file_path):
+        graph = {}
+        with open(file_path, 'r') as file:
+            for line in file:
+                if line.startswith('~'):  # Assuming lines starting with '~' are comments
+                    continue
+            # Parse the line to extract node information
+            # This is a simple example and may need to be adjusted based on the file format
+                parts = line.split()
+                if len(parts) < 2:  # Assuming at least two parts are needed for an edge
+                    continue
+            
+            # Extract node information from parts
+            # Example: start_node, end_node, length, capacity, etc.
+                start_node = int(parts[0])
+                end_node = int(parts[1])
+                edge_attributes = parts[2:]  # Adjust as per the file format
+
+            # Add to the graph dictionary
+                graph[(start_node, end_node)] = edge_attributes
+
+    
+        self.__init__(graph)
+
     # Override of add_edge function, notice that when an edge
     # is added, then the links and paths will changes alongside.
     # However, it doesn't matter when a vertex is added
@@ -283,3 +307,11 @@ class TrafficNetwork(Graph):
         origins and destinations 
         """
         return self.__paths
+
+
+class Network_Loader():
+
+
+
+if "__name__" == __main__: 
+    
